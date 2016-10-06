@@ -5,7 +5,7 @@ build:
       - mkdir -p build
       - go get
       - go build -o build/terraform-provider-kapacitor
-      - tar -zcvf terraform-provider-kapacitor-linux-amd64.tar.gz build
+      - tar -zcvf terraform-provider-kapacitor-linux-amd64.tar.gz build/terraform-provider-kapacitor
     #when:
     #  branch: master
       
