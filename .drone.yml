@@ -15,5 +15,5 @@ publish:
     bucket: "peoplenet-custom-tools"
     access_key: $$PEOPLENET_CI_AWS_KEY_ID
     secret_key: $$PEOPLENET_CI_AWS_SECRET_KEY
-    source: build
-    target: /terraform
+    source: build/terraform-provider-kapacitor
+    target: /terraform/terraform-provider-kapacitor
