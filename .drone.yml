@@ -2,8 +2,9 @@ build:
   main:
     image: golang
     commands:
+      - mkdir -p build
       - go get
-      - GOOS=linux GOARCH=amd64 ./build.sh
+      - go build -o build/terraform-provider-kapacitor
     #when:
     #  branch: master
       
