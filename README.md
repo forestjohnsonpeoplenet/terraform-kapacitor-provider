@@ -4,6 +4,8 @@ A Terraform plugin for managing TICK scripts in Kapacitor
 
 This is a simple Terraform plugin written following this guide: https://www.hashicorp.com/blog/terraform-custom-providers.html
 
+Based on the Kapacitor HTTP API: https://docs.influxdata.com/kapacitor/v1.0//api/api/
+
 #### features left unimplemented:
 
  * better integration with influxdb provider
