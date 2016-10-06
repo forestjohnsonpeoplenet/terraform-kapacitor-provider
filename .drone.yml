@@ -5,8 +5,7 @@ build:
       - go get
       - go build -o terraform-provider-kapacitor
       - tar -zcvf terraform-provider-kapacitor-linux-amd64.tar.gz terraform-provider-kapacitor
-    #when:
-    #  branch: master
+    
       
 publish:
   s3:
@@ -17,3 +16,5 @@ publish:
     secret_key: $$PEOPLENET_CI_AWS_SECRET_KEY
     source: terraform-provider-kapacitor-linux-amd64.tar.gz
     target: /terraform-provider-kapacitor/terraform-provider-kapacitor-linux-amd64.tar.gz
+  when:
+    branch: master
