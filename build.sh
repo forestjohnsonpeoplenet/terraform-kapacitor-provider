@@ -1,3 +1,4 @@
 !#/bin/bash
 
-go build -o terraform-provider-kapacitor
+mkdir -p build
+go build -o build/terraform-provider-kapacitor
