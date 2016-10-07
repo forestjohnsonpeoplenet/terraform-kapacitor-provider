@@ -37,8 +37,8 @@ func resourceTickScript() *schema.Resource {
 				},
 			},
 			"status": &schema.Schema{
-				Type:     schema.TypeBool,
-				Default:  false,
+				Type:     schema.TypeString,
+				Default:  "enabled",
 				Optional: true,
 			},
 			"vars": &schema.Schema{
@@ -82,9 +82,15 @@ func resourceTickScriptRead(data *schema.ResourceData, meta interface{}) error {
 			return err
 		}
 
+		taskStatusBytes, err := task.Status.MarshalText()
+		if err != nil {
+			return err
+		}
+
 		data.Set("type", string(taskTypeBytes))
 		data.Set("database_retention_policies", serializeDatabaseRetentionPolicies(task.DBRPs))
 		data.Set("tick_script", strings.Trim(task.TICKscript, "\n"))
+		data.Set("status", string(taskStatusBytes))
 		data.Set("id", task.ID)
 	} else {
 		// if we got here, then that means the script no longer exists.
@@ -146,10 +152,18 @@ func getCreateTaskOptions(data *schema.ResourceData) (kapacitorClient.CreateTask
 		return kapacitorClient.CreateTaskOptions{}, err
 	}
 
+	taskStatusString := data.Get("status").(string)
+	var taskStatus kapacitorClient.TaskStatus
+	err = taskStatus.UnmarshalText([]byte(taskStatusString))
+	if err != nil {
+		return kapacitorClient.CreateTaskOptions{}, err
+	}
+
 	return kapacitorClient.CreateTaskOptions{
 			Type:       taskType,
 			DBRPs:      dbrps,
 			TICKscript: tickScript,
+			Status:     taskStatus,
 		},
 		nil
 }
