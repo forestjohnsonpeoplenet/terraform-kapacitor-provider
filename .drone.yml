@@ -2,8 +2,7 @@ build:
   main:
     image: golang
     commands:
-      - go get
-      - go build -o terraform-provider-kapacitor
+      - GO15VENDOREXPERIMENT=1 go build -o terraform-provider-kapacitor
       - tar -zcvf terraform-provider-kapacitor-linux-amd64.tar.gz terraform-provider-kapacitor
     
       
